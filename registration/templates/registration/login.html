@@ -1,0 +1,41 @@
+{% extends 'nucleo/index.html' %}
+    {% block content %}
+    <section id="hero">
+        <div class="hero-container" data-aos="fade-up">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <div class="row">
+                <div class="col">
+                    {% if 'register' in request.GET %}
+                    <p style="color: green"> Usuario registrado correctamente</p>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <h2 class="mb-2">Login</h2>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" class="form-control fl">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" class="form-control fl2">
+                        </div>
+                        <nav class="navbar justify-content-center">
+                            <button type="submit" class="bot mt-3 ms-0">Login</button>
+                        </nav>
+                    </form>
+                        <br>
+                        <br>
+                        <p class="sty">Si aún no tienes tu cuenta...</p><a class="ss" href="{% url 'createClient' %}">Registrate</a></p>
+                    </div>
+                </section>
+            
+
+            {% endblock %}

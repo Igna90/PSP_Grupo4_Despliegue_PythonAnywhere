@@ -1,0 +1,18 @@
+{% extends 'nucleo/index.html' %}
+{% load crispy_forms_tags %}
+    {% block content %}
+            <section id="h">
+                <div class="h-container" data-aos="fade-up">
+                    <div class="back">
+                        <h2>Crear categoria</h2>
+                        <form action="{% url 'guardarCategoria' %}"  enctype="multipart/form-data" class="form" method="POST">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                    {% if field.errors %}
+                    {{ field.errors }}
+                    {% endif %}
+                    <button type="submit" class="bot" value="Confirmar">Crear categoria</button>
+                </div>
+                </div>
+            </section>
+    {% endblock %}

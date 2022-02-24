@@ -1,0 +1,46 @@
+{% extends 'nucleo/index.html' %}
+    {% block content %}
+    <section id="auto">
+        <div class="container">
+          <h2 class="ss">Proyectos en los que has participado</h2>
+          <p class="s">* Solo se muestran aquellos proyectos que ya han finalizado</p>
+            <table id="tt" class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Id Proyecto</th>
+                  <th>Titulo</th>
+                  <th>Descripcion</th>
+                  <th>Nivel</th>
+                  <th>Fecha de Inicio</th>
+                  <th>Fecha de Fin</th>
+                  <th>Informe</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for participate in participates %}
+                {% if request.user.role_user == "Cliente" %}
+                <tr class="a">
+                      <td>{{ participate.idProject.title }}</td>
+                      <td>{{ participate.idProject.description }}</td>
+                      <td>{{ participate.idProject.level }}</td>
+                      <td>{{ participate.idProject.startDate }}</td>
+                      <td>{{ participate.idProject.endDate }}</td>
+                      <td>{{ participate.idProject.endReport }}</td>
+                    </tr>
+                  {% else %}
+                  <tr class="a">
+                    <td>{{ participate.title }}</td>
+                    <td>{{ participate.description }}</td>
+                    <td>{{ participate.level }}</td>
+                    <td>{{ participate.startDate }}</td>
+                    <td>{{ participate.endDate }}</td>
+                    <td>{{ participate.endReport }}</td>
+                  </tr>
+                {% endif %}
+                {% endfor %}
+                  </tbody>
+                </table>
+                <button class="btn btn-primary bot"><a class="bl" href="{% url 'listProjects' %}">Volver a proyectos</a></button>
+        </div>
+    </section>   
+    {% endblock %}   

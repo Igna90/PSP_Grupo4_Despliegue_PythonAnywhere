@@ -1,0 +1,85 @@
+{% extends 'nucleo/index.html' %}
+    {% block content %}
+    <section id="auto">
+        <div class="container">
+            <h2 class="ss">Proyectos</h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 search">
+                <form method="GET">
+                  <select name="buscar" id="buscar" value="{{ request.get.buscar }}">
+                    <option selected disabled="true" name="buscar">Selecciona Categoria --</option>
+                    {% for category in categorys %}
+                    <option value="{{ category.id }}"> {{ category.name }}</option>
+                    {% endfor %}
+                  </select>
+                  <button type="submit" class="btn btn-primary bot">Buscar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <br>
+          {% if request.user.role_user == "Cliente" %}
+          <p class="s">* Podrás inscribirte sólo en aquellos proyectos que aún no hayan comenzado</p>
+          {% else %}
+          <p class="s">* Podrás eliminar y editar solo tus propios proyectos</p>
+          {% endif %}
+            <table id="tt" class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Empleado</th>
+                  <th>Titulo</th>
+                  <th>Descripcion</th>
+                  <th>Nivel</th>
+                  <th>Fecha comienzo</th>
+                  <th>Fecha fin</th>
+                  <th>Informe final</th>
+                  <th>Categoria</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in project_list %}
+                <tr class="a">
+                  
+                  <td >{{ item.idEmployee }}</td>
+                  <td>{{ item.title }}</td>
+                  <td>{{ item.description }}</td>
+                  <td>{{ item.level }}</td>
+                  <td>{{ item.startDate }}</td>
+                  <td>{{ item.endDate }}</td>
+                  <td>{{ item.endReport }}</td>
+                  <td >{{ item.idCategory }}</td>
+                  <td>
+                    {% if request.user.id == item.idEmployee.id %}
+                    <button class="btn btn-primary bot"><a class="bl" href="{% url 'deleteProjects' item.id %}">Eliminar</a></button>
+                    <button class="btn btn-primary bot"><a class="bl" href="{% url 'updateProject' item.id %}">Editar</a></button>
+                    {% endif %}
+                    {% for projectDate in projectsDates %}
+                    {% if request.user.role_user == "Cliente" and item.id == projectDate.id %}
+                        {% csrf_token %}
+                        <button class="btn btn-primary bot"><a class="bl" href="{% url 'projectParticipate' item.id %}">Inscribirse</a></button>
+                        {% endif %}
+                    {% endfor %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <div class="row">
+              {% if request.user.role_user == 'Empleado' %}
+              <div class="col-5">
+                <button class="btn btn-primary bot"><a  class="bl" href="{% url 'createProject' %}">Crear Proyecto</a></button>
+              </div>
+              <div class="col-7 frm">
+                <a href="{% url 'listParticipate' %}">* VER PROYECTOS EN LOS QUE HAS PARTICIPADO</a>
+              </div>
+              {% else %}
+              <div class="col-12">
+                <a href="{% url 'listParticipate' %}">* VER PROYECTOS EN LOS QUE HAS PARTICIPADO</a>
+              </div>
+              {% endif %}
+            </div>
+        </div>
+    </section>   
+    {% endblock %}

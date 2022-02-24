@@ -1,0 +1,22 @@
+{% extends 'nucleo/index.html' %}
+{% load crispy_forms_tags %}
+    {% block content %}
+            <section id="h">
+                <div class="hero-container">
+                    <div class="back">
+                        <h2>Finaliza tus proyectos</h2>
+                        <form class="form" method="POST">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                    {% if field.errors %}
+                    {{ field.errors }}  
+                    {% endif %}
+                   
+                    <input type="hidden" name="idProject" value="{{ project.id }}"/>
+                    
+                      
+                    <button type="submit" class="bot" value="Confirmar">Finalizar</button>
+                </div>
+                </div>
+            </section>
+    {% endblock %}

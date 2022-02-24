@@ -1,0 +1,36 @@
+{% extends 'nucleo/index.html' %}
+    {% block content %}
+    <section id="auto">
+        <div class="container">
+            <h2 class="ss">Proyectos de la próxima semana</h2>
+            <table id="tt" class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Titulo</th>
+                  <th>Descripcion</th>
+                  <th>Nivel</th>
+                  <th>Fecha de Inicio</th>
+                  <th>Fecha de Fin</th>
+                  <th>Informe</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for projectsDate in projectsDates %}
+                    <tr class="a">
+                      <td>{{ projectsDate.title }}</td>
+                      <td>{{ projectsDate.description }}</td>
+                      <td>{{ projectsDate.level }}</td>
+                      <td>{{ projectsDate.startDate }}</td>
+                      <td>{{ projectsDate.endDate }}</td>
+                      <td>{{ projectsDate.endReport }}</td>
+                      <td>
+                          <button type ="submit" class="btn btn-primary bot"><a class="bl" href="{% url 'projectParticipate' projectsDate.id %}">Inscribirse</a></button>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+        </div>
+    </section>   
+    {% endblock %}   

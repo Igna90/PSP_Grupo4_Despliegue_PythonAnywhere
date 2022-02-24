@@ -1,0 +1,9 @@
+{% extends 'nucleo/index.html' %}
+    {% block content %}
+    <section id="hero">
+        <div class="hero-container" data-aos="fade-up">
+            <p>Ya estás inscrito en este proyecto </p>
+            <button class="bot"><a href="{% url 'listProjects' %}">Volver</a></button>
+        </div>
+    </section>
+    {% endblock %}

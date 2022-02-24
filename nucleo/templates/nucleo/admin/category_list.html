@@ -1,0 +1,43 @@
+{% extends 'nucleo/index.html' %}
+{% load static %}
+    {% block content %}
+    <section id="auto">
+        <div class="container">
+            <h2 class="ss">Categorias</h2>
+            <table id="tt" class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Imagen</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in category_list %}
+                <tr class="a">
+                  <td>{{ item.name }}</td>
+                  {% if item.image %}
+                  <td>
+                    <img src="{{ item.image.url}}" alt="Avatar"  class="cat-size">
+                  </td>
+                </td>
+                {% else %}
+                  <td>
+                    <img src="{% static 'assets/img/Captura_de_pantalla_1.png' %}" alt="" class="cat-size">
+                  </td>
+                  {% endif %}
+                  <td>
+                    <button class="btn btn-primary bot"><a  class="bl" href="{% url 'updateCategory' item.id %}">Editar</a></button>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary bot"><a class="bl" href="{% url 'deleteCategory' item.id %}">Eliminar</a></button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button class="btn btn-primary bot"><a  class="bl" href="{% url 'createCategoria' %}">Crear Categoria</a></button>
+        </div>
+    </section>   
+    {% endblock %}     

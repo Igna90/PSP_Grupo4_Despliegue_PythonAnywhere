@@ -1,0 +1,33 @@
+{% extends 'nucleo/index.html' %}
+    {% block content %}
+    <section id="auto">
+        <div class="container">
+            <h2 class="ss">Proyecto : </h2>
+            <table id="tt" class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Titulo</th>
+                  <th>Descripción</th>
+                  <th>Nivel</th>
+                  <th>Fecha de Comiendo</th>
+                  <th>Fecha de Fin</th>
+                  <th>Informe final</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for project in projects %}
+                <tr class="a">
+                  <td>{{ project.title }}</td>
+                  <td>{{ project.description }}</td>
+                  <td>{{ project.level }}</td>
+                  <td>{{ project.startDate }}</td>
+                  <td >{{ project.endDate }}</td>
+                  <td>{{ project.endReport }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button class="btn btn-primary bot"><a class="bl" href="{% url 'sClient' %}">Volver a Clientes</a></button>
+        </div>
+    </section>   
+    {% endblock %}     

@@ -1,0 +1,42 @@
+{% extends 'nucleo/index.html' %}
+
+    {% block content %}
+    <section id="auto">
+        <div class="container">
+            <h2 class="ss">Empleados</h2>
+            <table id="tt" class="table table-hover">
+              <thead>
+                <tr>
+                  <th>DNI</th>
+                  <th>Nombre de Usuario</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Dirección</th>
+                  <th>Biografia</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                <tr class="a">
+                  <td>{{ user.dni }}</td>
+                  <td>{{ user.username }}</td>
+                  <td>{{ user.name }}</td>
+                  <td >{{ user.surname }}</td>
+                  <td>{{ user.address }}</td>
+                  <td>{{ user.biography }}</td>
+                  <td>
+                    <button class="btn btn-primary bot"><a class="bl" href="{% url 'deleteUser' user.id %}">Eliminar</a></button>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary bot"><a  class="bl" href="{% url 'updateEmployee' user.id %}">Editar</a></button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button class="btn btn-primary bot"><a  class="bl" href="{% url 'createEmployee' %}">Crear Empleado</a></button>
+        </div>
+    </section>   
+    {% endblock %}     

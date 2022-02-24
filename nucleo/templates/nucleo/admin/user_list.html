@@ -1,0 +1,65 @@
+{% extends 'nucleo/index.html' %}
+
+    {% block content %}
+    <section id="auto">
+        <div class="container">
+            <h2 class="ss">Clientes</h2>
+            <table id="tt" class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Nombre de Usuario</th>
+                  <th>DNI</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Dirección</th>
+                  <th>Fecha de Nacimiento</th>
+                  <th>Fecha de Registro</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                <tr class="a">
+                  <td>{{ user.username }}</td>
+                  <td>{{ user.dni }}</td>
+                  <td>{{ user.name }}</td>
+                  <td >{{ user.surname }}</td>
+                  <td>{{ user.address }}</td>
+                  <td>{{ user.birthDate }}</td>
+                  <td>{{ user.registerDate }}</td>
+                  {%if user.active == False %}
+                  <td>
+                    <form action="{% url 'activeUser' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="idClient" value="{{ user.id }}"/>
+                    <button type="submit" class="btn btn-primary bot">Activar</button>
+                    </form>
+
+                  </td>
+                  {% else %}
+                  <td>
+                   <form action="{% url 'activeUser' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="idClient" value="{{ user.id }}"/>
+                    <button type="submit" class="btn btn-primary bot">Desactivar</button>
+                  </form>
+                  </td>
+                  {% endif %}
+                  <td>
+                    <button class="btn btn-primary bot"><a class="bl" href="{% url 'deleteUser' user.id %}">Eliminar</a></button>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary bot"><a  class="bl" href="{% url 'updateUser' user.id %}">Editar</a></button>
+                  </td>
+                
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button class="btn btn-primary bot"><a  class="bl" href="{% url 'createClient' %}">Crear Cliente</a></button>
+        </div>
+    </section>   
+    {% endblock %}     
+ 

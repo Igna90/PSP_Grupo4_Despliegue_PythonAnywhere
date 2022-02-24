@@ -1,0 +1,46 @@
+{% extends 'nucleo/index.html' %}
+
+    {% block content %}
+    <section id="auto">
+        <div class="container">
+            <h2 class="ss">Finaliza tus proyectos</h2>
+          <br>
+          {% if projects %}
+            <table id="tt" class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Titulo</th>
+                  <th>Descripcion</th>
+                  <th>Nivel</th>
+                  <th>Fecha comienzo</th>
+                  <th>Fecha fin</th>
+                  <th>Informe final</th>
+                  <th>Categoria</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for project in projects %}
+                <tr class="a">
+                  <td>{{ project.title }}</td>
+                  <td>{{ project.description }}</td>
+                  <td>{{ project.level }}</td>
+                  <td>{{ project.startDate }}</td>
+                  <td>{{ project.endDate }}</td>
+                  <td>{{ project.endReport }}</td>
+                  <td >{{ project.idCategory }}</td>
+                  <td>
+                    <button class="btn btn-primary bot"><a class="bl" href="{% url 'endProjects' project.id %}">Finalizar</a></button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+           
+            <h3  class="mx-auto-mb5" >No existe ningun proyecto que puedas finalizar actualmente.<h3>
+                {% endif %}
+              
+        </div>
+    </section>   
+    {% endblock %}

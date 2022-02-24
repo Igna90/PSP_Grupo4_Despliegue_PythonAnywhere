@@ -1,0 +1,53 @@
+{% extends 'nucleo/index.html' %}
+    {% block content %}
+    <section id="auto">
+        <div class="container">
+            <h2 class="ss">Clientes</h2>
+            <table id="tt" class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Usuario</th>
+                  <th>DNI</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Proyecto</th>
+                  <th>Fecha de Registro</th>
+                  <th>Rol Actual</th>
+                  <th>Modificar Rol</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for participate in participates %}
+                <tr class="a">
+                  <td>{{ participate.idCliente.username }}</td>
+                  <td>{{ participate.idCliente.dni }}</td>
+                  <td>{{ participate.idCliente.name }}</td>
+                  <td>{{ participate.idCliente.surname }}</td>
+                  <td>{{ participate.idProject.title }}</td>
+                  <td >{{ participate.registrationDate }}</td>
+                  <td>{{ participate.rol }}</td>
+                  <td>
+                    <form method="POST" action="">
+                      {% csrf_token %}
+                      <select name="rol" id="rol">
+                          <option value="Estudiante">Estudiante</option>
+                          <option value="Practicas">Prácticas</option>
+                          <option value="Trabajador">Trabajador</option>
+                          <option value="Encargado">Encargado de proyecto</option>
+                      </select>
+                      <input type="hidden" name="id" value="{{ participate.id }}"/>
+                      <input type="hidden" name="idProject" value="{{ participate.idProject.id }}"/>
+                    </td>
+                    <td>
+                      <button class="btn btn-primary bot" type="submit">Actualizar</button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button class="btn btn-primary bot"><a class="bl" href="{% url 'listEmployeeProjects' %}">Volver a proyectos</a></button>
+        </div>
+    </section>   
+    {% endblock %}     

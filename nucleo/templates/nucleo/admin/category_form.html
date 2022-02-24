@@ -1,0 +1,18 @@
+{% extends 'nucleo/index.html' %}
+{% load crispy_forms_tags %}
+    {% block content %}
+            <section id="h">
+                <div class="hero-container">
+                    <div class="back">
+                        <h2>Editar categoria</h2>
+                        <form action="" class="form" enctype="multipart/form-data" method="POST">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                    {% if field.errors %}
+                    {{ field.errors }}
+                    {% endif %}
+                    <button type="submit" class="bot" value="Confirmar">Actualizar</button>
+                </div>
+                </div>
+            </section>
+    {% endblock %}

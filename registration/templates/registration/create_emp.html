@@ -1,0 +1,18 @@
+{% extends 'nucleo/index.html' %}
+{% load crispy_forms_tags %}
+    {% block content %}
+            <section id="h">
+                <div class="hero-container" data-aos="fade-up">
+                    <div class="back">
+                        <h2>Crear empleado</h2>
+                        <form action="{% url 'guardarEmployee' %}" class="form" method="POST">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                    {% if field.errors %}
+                    {{ field.errors }}
+                    {% endif %}
+                    <button type="submit" class="bot" value="Confirmar">Registrar</button>
+                </div>
+                </div>
+            </section>
+    {% endblock %}

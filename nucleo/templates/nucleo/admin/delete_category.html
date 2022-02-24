@@ -1,0 +1,19 @@
+{% extends 'nucleo/index.html' %}
+    {% block content %}
+    <section id="hero">
+        <div class="hero-container" data-aos="fade-up">
+            <form method="post">
+                {% csrf_token %}
+                <p>¿Estás seguro de que deseas eliminar la categoria <strong>"{{object}}"</strong> ?</p>
+                <div class="row">
+                    <div class="col-6">
+                        <input class="bot" type="submit" value="Confirmar">
+                    </div>
+                    <div class="col-6">
+                        <button class="bot"><a href="{% url 'categoryList' %}">Cancelar</a></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    {% endblock %}

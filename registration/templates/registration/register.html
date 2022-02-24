@@ -1,0 +1,29 @@
+{% extends 'nucleo/index.html' %}
+{% load crispy_forms_tags %}
+    {% block content %}
+            <section id="h">
+                <div class="hero-container" data-aos="fade-up">
+                    <div class="col-12">
+                        {% if messages %}
+                                {% for message in messages %}
+                                {% if message.tags == 'error' %}
+                                <strong><span>{{ message }}</span></strong>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <br>
+                            <br>
+                    <div class="back">
+                        <h2>Registrar Usuario</h2>
+                        <form action="{% url 'guardarClient' %}" class="form" method="POST">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                    {% if field.errors %}
+                    {{ field.errors }}
+                    {% endif %}
+                    <button type="submit" class="bot" value="Confirmar">Registrar</button>
+                </div>
+                </div>
+            </section>
+    {% endblock %}
